@@ -1,4 +1,4 @@
-package org.framework.util;
+package org.socialnetwork.definitions;
 
 public record Result<T>(T data, String[] context) implements IValue {
 

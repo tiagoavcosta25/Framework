@@ -1,12 +1,12 @@
-package org.framework.annotations;
+package org.socialnetwork.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DTO {
-    String value() default "";
+public @interface NotBlank {
+    String message() default "This field must not be blank";
 }

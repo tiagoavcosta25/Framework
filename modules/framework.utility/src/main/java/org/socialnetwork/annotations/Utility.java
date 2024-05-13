@@ -1,4 +1,4 @@
-package org.framework.annotations;
+package org.socialnetwork.annotations;
 
 import org.springframework.stereotype.Component;
 import java.lang.annotation.ElementType;
