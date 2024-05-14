@@ -1,6 +1,7 @@
 package org.socialnetwork.validators;
 
 import org.socialnetwork.annotations.NotBlank;
+import org.socialnetwork.exceptions.NotBlankException;
 
 import java.lang.reflect.Field;
 public class NotBlankValidator implements FieldValidator {
@@ -10,12 +11,12 @@ public class NotBlankValidator implements FieldValidator {
     }
 
     @Override
-    public void validate(Field field, Object object) throws IllegalAccessException, IllegalArgumentException {
+    public void validate(Field field, Object object) throws IllegalAccessException, NotBlankException {
         field.setAccessible(true);
         Object value = field.get(object);
         if (value == null || ((String) value).trim().isEmpty()) {
             NotBlank annotation = field.getAnnotation(NotBlank.class);
-            throw new IllegalArgumentException(annotation.message(), null);
+            throw new NotBlankException(annotation.message().replace("{field}", field.getName()));
         }
     }
 }
