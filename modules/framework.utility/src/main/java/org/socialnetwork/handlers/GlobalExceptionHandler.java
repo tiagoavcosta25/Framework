@@ -1,5 +1,7 @@
 package org.socialnetwork.handlers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.socialnetwork.definitions.Error;
 import org.socialnetwork.definitions.IValue;
 import org.socialnetwork.exceptions.ValidationException;
@@ -11,13 +13,15 @@ import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<? extends IValue> handleValidationException(ValidationException ex, WebRequest request) {
         return handleException(ex, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     private ResponseEntity<? extends IValue> handleException(Exception ex, HttpStatus status) {
-        ex.printStackTrace();
+        logger.error(ex.getMessage(), ex);
         return new ResponseEntity<>(buildError(ex), status);
     }
 
